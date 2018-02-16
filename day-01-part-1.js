@@ -1,15 +1,16 @@
 {
 	const solve = input => {
 		const list = input.split('');
-		const circularList = list.concat([list[0]]);
-		const result = circularList.reduce(
-			({last,sum}, curr) => {
-				if (last === curr) return {last: curr, sum: sum + Number(curr)};
-				return {last: curr, sum};
+		const size = list.length;
+		const distance = 1;
+		const result = list.reduce(
+			(sum, curr, i) => {
+				if (curr === list[(i + distance) % size]) return sum + Number(curr);
+				return sum;
 			},
-			{last: '', sum: 0}
+			0
 		);
-		return result.sum;
+		return result;
 	};
 	console.log(solve('1122') === 3);
 	console.log(solve('1111') === 4);
